@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 YiyiSoft. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "InitViewController.h"
 #import "MaskedImageViewController.h"
 
-@interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@interface InitViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 {
     // Drawing
     CGPoint lastPoint;
@@ -29,11 +29,10 @@
 
 #define OPACITY .6
 
-@implementation ViewController
+@implementation InitViewController
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    [self setDrawingImageViewFrame];
 }
 
 -(void)viewDidLoad {
@@ -136,13 +135,6 @@
     blue = 0.145;
     brushWidth = 20;
     blendMode = kCGBlendModeNormal;
-}
-
-- (void) setDrawingImageViewFrame {
-    if (self.imageView.image) {
-        self.tempDrawImage.frame = CGRectMake(0, 0, self.imageView.image.size.width, self.imageView.image.size.height);
-        self.tempDrawImage.center = self.imageView.center;
-    }
 }
 
 - (IBAction)clearScreen:(id)sender {
