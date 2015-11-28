@@ -31,13 +31,9 @@
 
 @implementation InitViewController
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 -(void)viewDidLoad {
     [super viewDidLoad];
-    [self setColorRed:nil];
+    [self startDrawing:nil];
     
     // scrollView
     self.scrollViewContainer.contentSize = self.imageView.image ? self.imageView.image.size : CGSizeZero;
@@ -129,7 +125,7 @@
     blendMode = kCGBlendModeClear;
 }
 
-- (IBAction) setColorRed:(id)sender {
+- (IBAction) startDrawing:(id)sender {
     red = .914;
     green = 0.119;
     blue = 0.145;
@@ -139,7 +135,7 @@
 
 - (IBAction)clearScreen:(id)sender {
     self.tempDrawImage.image = nil;
-    [self setColorRed:nil];
+    [self startDrawing:nil];
 }
 
 #pragma mark - Image Picker
@@ -160,6 +156,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+#pragma mark - Segues
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showMask"]) {
         MaskedImageViewController *maskedVC = (MaskedImageViewController*)segue.destinationViewController;
