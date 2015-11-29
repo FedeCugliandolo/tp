@@ -133,7 +133,7 @@
     blendMode = kCGBlendModeNormal;
 }
 
-- (IBAction)clearScreen:(id)sender {
+- (IBAction)clearScreen: (id)sender {
     self.tempDrawImage.image = nil;
     [self startDrawing:nil];
 }
@@ -142,12 +142,33 @@
 
 - (IBAction)showActionSheet:(id)sender {
     
-    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-    picker.delegate=self;
-    picker.allowsEditing = YES;
-    [picker setSourceType:(UIImagePickerControllerSourceTypePhotoLibrary)];
-    [self presentViewController:picker animated:YES completion:Nil];
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Open Photo" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"Tomar fotografía"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action) {
+                                                             UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+                                                             picker.delegate=self;
+                                                             picker.allowsEditing = YES;
+                                                             [picker setSourceType:(UIImagePickerControllerSourceTypeCamera)];
+                                                             [self presentViewController:picker animated:YES completion:Nil];
+                                                         }];
+    UIAlertAction *libraryAction = [UIAlertAction actionWithTitle:@"Seleccionar Imagen"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action) {
+                                                             UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+                                                             picker.delegate=self;
+                                                             picker.allowsEditing = YES;
+                                                             [picker setSourceType:(UIImagePickerControllerSourceTypePhotoLibrary)];
+                                                             [self presentViewController:picker animated:YES completion:Nil];
+                                                         }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//        [self dismiss dismissViewControllerAnimated:YES completion:nil];
+    }];
     
+    [actionSheet addAction:libraryAction];
+    [actionSheet addAction:cameraAction];
+    [actionSheet addAction:cancelAction];
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {

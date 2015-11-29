@@ -146,6 +146,9 @@
                     <navigationItem key="navigationItem" title="Sticker Machine" id="FeY-rR-Bxr">
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="4b4-D8-aS0">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="showActionSheet:" destination="BYZ-38-t0r" id="pYI-BA-IAb"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
