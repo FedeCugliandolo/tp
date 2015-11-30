@@ -24,6 +24,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollViewContainer;
 @property (weak, nonatomic) IBOutlet UIView *imageViewContainer;
+@property (weak, nonatomic) IBOutlet UIButton *brushButton;
+@property (weak, nonatomic) IBOutlet UIButton *eraserButton;
 
 @end
 
@@ -123,6 +125,8 @@
 
 - (IBAction) setEraser:(id)sender {
     blendMode = kCGBlendModeClear;
+    self.eraserButton.selected = YES;
+    self.brushButton.selected = NO;
 }
 
 - (IBAction) startDrawing:(id)sender {
@@ -131,6 +135,8 @@
     blue = 0.145;
     brushWidth = 20;
     blendMode = kCGBlendModeNormal;
+    self.eraserButton.selected = NO;
+    self.brushButton.selected = YES;
 }
 
 - (IBAction)clearScreen: (id)sender {
@@ -162,7 +168,6 @@
                                                              [self presentViewController:picker animated:YES completion:Nil];
                                                          }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//        [self dismiss dismissViewControllerAnimated:YES completion:nil];
     }];
     
     [actionSheet addAction:libraryAction];
