@@ -26,7 +26,7 @@
                                     <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5V-1B-GAa">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="400"/>
                                         <subviews>
-                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="andy" translatesAutoresizingMaskIntoConstraints="NO" id="AMD-Td-5Wa">
+                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uca" translatesAutoresizingMaskIntoConstraints="NO" id="AMD-Td-5Wa">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="400"/>
                                                 <animations/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -186,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="196" y="402"/>
+            <point key="canvasLocation" x="82" y="402"/>
         </scene>
         <!--Masked Image View Controller-->
         <scene sceneID="V0H-6N-0Fu">
@@ -292,7 +292,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyh-yE-JC8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="679" y="402"/>
+            <point key="canvasLocation" x="515" y="407"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2Sa-q7-xUI">
@@ -315,7 +315,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="andy" width="250" height="250"/>
         <image name="back-white" width="586" height="537"/>
         <image name="brush" width="314" height="296"/>
         <image name="clear" width="263" height="271"/>
@@ -325,5 +324,6 @@
         <image name="preview" width="286" height="286"/>
         <image name="sticker-white" width="634" height="562"/>
         <image name="toPNG-white" width="420" height="507"/>
+        <image name="uca" width="252" height="155"/>
     </resources>
 </document>
