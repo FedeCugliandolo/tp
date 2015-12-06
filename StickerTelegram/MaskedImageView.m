@@ -1,14 +1,6 @@
-//
-//  WBMaskedImageView.m
-//  masked
-//
-//  Created by Иван Труфанов on 03.10.15.
-//  Copyright © 2015 Werbary. All rights reserved.
-//
+#import "MaskedImageView.h"
 
-#import "WBMaskedImageView.h"
-
-@implementation WBMaskedImageView
+@implementation MaskedImageView
 
 - (void)setOriginalImage:(UIImage *)originalImage {
     _originalImage = originalImage;
@@ -23,7 +15,7 @@
 
 - (void) updateImage {
     if (_originalImage && _maskImage) { //All right, make mask
-        UIImage *maskedImage = [WBMaskedImageView maskImage:_originalImage withMaskImage:_maskImage];
+        UIImage *maskedImage = [MaskedImageView maskImage:_originalImage withMaskImage:_maskImage];
         self.image = maskedImage;
     } else if (_originalImage) { //Have only original image, show it
         self.image = _originalImage;

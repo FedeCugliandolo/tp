@@ -7,12 +7,12 @@
 //
 
 #import "MaskedImageViewController.h"
-#import "WBMaskedImageView.h"
+#import "MaskedImageView.h"
 #import "Sticker.h"
 
 @interface MaskedImageViewController ()
 
-@property (strong, nonatomic) IBOutlet WBMaskedImageView *imageView;
+@property (strong, nonatomic) IBOutlet MaskedImageView *imageView;
 @property (nonatomic, strong) Sticker *sticker;
 
 @end
