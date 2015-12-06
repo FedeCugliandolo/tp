@@ -7,12 +7,13 @@
 //
 
 #import "MaskedImageViewController.h"
-#import "UIimage+WebP.h"
 #import "WBMaskedImageView.h"
+#import "Sticker.h"
 
 @interface MaskedImageViewController ()
 
 @property (strong, nonatomic) IBOutlet WBMaskedImageView *imageView;
+@property (nonatomic, strong) Sticker *sticker;
 
 @end
 
@@ -23,6 +24,8 @@
     self.imageView.originalImage = self.originalImage;
     self.imageView.maskImage = self.maskedImage;
     [self trimImageView:self.imageView];
+    self.sticker = [Sticker new];
+    self.sticker.stickerImage = self.imageView.image;
 }
 
 - (IBAction)dismiss:(id)sender {
@@ -30,46 +33,18 @@
 }
 
 - (IBAction)shareAsSticker:(id)sender {
-    [self getWebPImage];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filename = [documentsDirectory stringByAppendingPathComponent:@"image.webp"];
-    
-    self.dc = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:filename]];
+    self.dc = [UIDocumentInteractionController interactionControllerWithURL:self.sticker.webpImageDataURL];
     self.dc.delegate = self;
     [self.dc presentOptionsMenuFromRect:self.view.bounds inView:self.view animated:YES];
 }
 
-- (void) getWebPImage {
-    __block NSString *webPPath;
-    [UIImage imageToWebP:self.imageView.image quality:100 alpha:1.0
-                  preset:WEBP_PRESET_ICON
-             configBlock:nil
-         completionBlock:^(NSData *result) {
-             NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-             webPPath = [paths[0] stringByAppendingPathComponent:@"image.webp"];
-             if (![result writeToFile:webPPath atomically:YES]) {
-                 NSLog(@"Failed to save file");
-             }
-         } failureBlock:^(NSError *error) {
-             NSLog(@"%@", error.localizedDescription);
-         }];
-}
 
 - (IBAction)shareAsPNG:(id)sender {
     if (!self.imageView.image) return;
     else {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"image.png"];
-        
-        NSData *imgData = UIImagePNGRepresentation(self.imageView.image);
-        
-        if ([imgData writeToFile:filePath atomically:YES]) {
-            self.dc = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:filePath]];
-            self.dc.delegate = self;
-            [self.dc presentOptionsMenuFromRect:self.view.bounds inView:self.view animated:YES];
-        }
+        self.dc = [UIDocumentInteractionController interactionControllerWithURL:self.sticker.pngImageDataURL];
+        self.dc.delegate = self;
+        [self.dc presentOptionsMenuFromRect:self.view.bounds inView:self.view animated:YES];
     }
 }
 
