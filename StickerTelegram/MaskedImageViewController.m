@@ -24,7 +24,7 @@
     self.imageView.originalImage = self.originalImage;
     self.imageView.maskImage = self.maskedImage;
     [self trimImageView:self.imageView];
-    self.sticker = [Sticker new];
+    self.sticker = [[Sticker alloc] init];
     self.sticker.stickerImage = self.imageView.image;
 }
 

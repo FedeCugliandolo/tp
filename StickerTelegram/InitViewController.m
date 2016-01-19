@@ -53,7 +53,7 @@
 -(void)setScrollViewContainer:(UIScrollView *)scrollViewContainer {
     _scrollViewContainer = scrollViewContainer;
     _scrollViewContainer.minimumZoomScale = 1;
-    _scrollViewContainer.maximumZoomScale = 2;
+    _scrollViewContainer.maximumZoomScale = 4;
     _scrollViewContainer.delegate = self;
     self.scrollViewContainer.contentSize = self.imageView.image ? self.imageView.image.size : CGSizeZero;
 }
@@ -159,14 +159,14 @@
                                                              [self presentViewController:picker animated:YES completion:Nil];
                                                          }];
     UIAlertAction *libraryAction = [UIAlertAction actionWithTitle:@"Seleccionar Imagen"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction *action) {
-                                                             UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-                                                             picker.delegate=self;
-                                                             picker.allowsEditing = YES;
-                                                             [picker setSourceType:(UIImagePickerControllerSourceTypePhotoLibrary)];
-                                                             [self presentViewController:picker animated:YES completion:Nil];
-                                                         }];
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action) {
+                                                              UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+                                                              picker.delegate=self;
+                                                              picker.allowsEditing = YES;
+                                                              [picker setSourceType:(UIImagePickerControllerSourceTypePhotoLibrary)];
+                                                              [self presentViewController:picker animated:YES completion:Nil];
+                                                          }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancelar" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     
