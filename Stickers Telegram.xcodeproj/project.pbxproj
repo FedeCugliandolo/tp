@@ -461,7 +461,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					$../../StickerTelegram,
+					"$(PROJECT_DIR)StickerTelegram",
 				);
 				INFOPLIST_FILE = StickerTelegram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -479,7 +479,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					$../../StickerTelegram,
+					"$(PROJECT_DIR)StickerTelegram",
 				);
 				INFOPLIST_FILE = StickerTelegram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
