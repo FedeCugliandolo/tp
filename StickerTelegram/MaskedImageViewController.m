@@ -9,6 +9,8 @@
 #import "MaskedImageViewController.h"
 #import "MaskedImageView.h"
 #import "Sticker.h"
+#import "JPNG.h"
+#import "UIImage+WebP.h"
 
 @interface MaskedImageViewController ()
 
@@ -42,10 +44,13 @@
 - (IBAction)shareAsPNG:(id)sender {
     if (!self.imageView.image) return;
     else {
-        self.dc = [UIDocumentInteractionController interactionControllerWithURL:self.sticker.pngImageDataURL];
-        self.dc.delegate = self;
-        [self.dc presentOptionsMenuFromRect:self.view.bounds inView:self.view animated:YES];
+        [self.sticker getWebPImage];
     }
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    self.sticker = nil;
+    self.maskedImage = nil;
 }
 
 #pragma mark - Cropping Image
@@ -145,6 +150,52 @@
     UIImage *newImage = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
     imageView.image = newImage;
+}
+
+#pragma mark - Scale Image
+- (UIImage *)scaleImage:(UIImage *)originalImage toSize:(CGSize)size
+{
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(NULL, size.width, size.height, 8, 0, colorSpace, kCGImageAlphaPremultipliedLast);
+    CGContextClearRect(context, CGRectMake(0, 0, size.width, size.height));
+    
+    if (originalImage.imageOrientation == UIImageOrientationRight) {
+        CGContextRotateCTM(context, -M_PI_2);
+        CGContextTranslateCTM(context, -size.height, 0.0f);
+        CGContextDrawImage(context, CGRectMake(0, 0, size.height, size.width), originalImage.CGImage);
+    } else {
+        CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), originalImage.CGImage);
+    }
+    
+    CGImageRef scaledImage = CGBitmapContextCreateImage(context);
+    CGColorSpaceRelease(colorSpace);
+    CGContextRelease(context);
+    
+    UIImage *image = [UIImage imageWithCGImage:scaledImage];
+    CGImageRelease(scaledImage);
+    
+    return image;
+}
+
+- (CGSize)estimateNewSize:(CGSize)newSize forImage:(UIImage *)image
+{
+    if (image.size.width > image.size.height) {
+        newSize = CGSizeMake(newSize.width, (image.size.height/image.size.width) * newSize.height);
+    } else {
+        newSize = CGSizeMake((image.size.width/image.size.height) * newSize.width, newSize.height);
+    }
+    
+    return newSize;
+}
+
+- (UIImage *)scaleImage:(UIImage *)image proportionallyToSize:(CGSize)newSize
+{
+    return [self scaleImage:image toSize:[self estimateNewSize:newSize forImage:image]];
+}
+
+- (UIImage *)scaleImageWithData:(NSData *)imageData proportionallyToSize:(CGSize)newSize
+{
+    return [self scaleImage:[UIImage imageWithData:imageData] toSize:[self estimateNewSize:newSize forImage:[UIImage imageWithData:imageData]]];
 }
 
 @end

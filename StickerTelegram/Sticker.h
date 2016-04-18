@@ -14,5 +14,5 @@
 @property (nonatomic, strong) NSURL *webpImageDataURL;
 @property (nonatomic, strong) NSURL *pngImageDataURL;
 @property (nonatomic, strong) UIImage *stickerImage;
-
+- (void) getWebPImage;
 @end

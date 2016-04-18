@@ -133,7 +133,7 @@
     red = .914;
     green = 0.119;
     blue = 0.145;
-    brushWidth = 20;
+    brushWidth = 60;
     blendMode = kCGBlendModeNormal;
     self.eraserButton.selected = NO;
     self.brushButton.selected = YES;
